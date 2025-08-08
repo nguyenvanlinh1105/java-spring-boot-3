@@ -5,6 +5,7 @@ import com.linhnguyen.springbootbasic.dto.UserUpdateRequest;
 import com.linhnguyen.springbootbasic.entity.User;
 import com.linhnguyen.springbootbasic.service.UserService;
 import jakarta.persistence.Entity;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class userController {
     private UserService userService;
     @PostMapping()
     public User createUser(
-            @RequestBody UserCreationRequest req
+            @RequestBody @Valid UserCreationRequest req
             ){
         return userService.createUser(req);
     }
@@ -33,11 +34,11 @@ public class userController {
     }
 
     @PutMapping("/{userId}")
-    public User updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest req){
+    public User updateUser(@PathVariable String userId, @RequestBody @Valid UserUpdateRequest req){
         return userService.updateUser(userId, req);
     }
 
-    @DeleteMapping("/userId")
+    @DeleteMapping("/{userId}")
     public String delete (@PathVariable String userId) {
         return userService.deleteUser(userId);
     }
