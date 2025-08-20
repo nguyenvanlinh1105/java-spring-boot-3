@@ -3,6 +3,8 @@ package com.linhnguyen.springbootbasic.service;
 import com.linhnguyen.springbootbasic.dto.UserCreationRequest;
 import com.linhnguyen.springbootbasic.dto.UserUpdateRequest;
 import com.linhnguyen.springbootbasic.entity.User;
+import com.linhnguyen.springbootbasic.exception.AppException;
+import com.linhnguyen.springbootbasic.exception.ErrorCode;
 import com.linhnguyen.springbootbasic.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,9 @@ public class UserService {
     public User createUser(UserCreationRequest req){
         User newUser = new User();
         if(userRepository.existsByUsername(req.getUsername())){
-            throw new RuntimeException("Tên username đã tồn tại");
+            throw new AppException(ErrorCode.USER_EXISTED);
+//            throw new RuntimeException("user existed");
+
         }
         newUser.setUsername(req.getUsername());
         newUser.setPassword(req.getPassword());
@@ -34,7 +38,7 @@ public class UserService {
     }
 
     public User getUser(String userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("user not found"));
+        return userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUD));
     }
 
     public User updateUser (String userId, UserUpdateRequest req){
@@ -52,7 +56,7 @@ public class UserService {
     @Transactional
     public String deleteUser(String userId) {
         User findUser = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Người dùng không tồn tại"));
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUD));
         userRepository.delete(findUser);
         return "User has been deleted";
     }

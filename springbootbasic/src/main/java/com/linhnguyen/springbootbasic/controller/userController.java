@@ -1,5 +1,6 @@
 package com.linhnguyen.springbootbasic.controller;
 
+import com.linhnguyen.springbootbasic.dto.ApiResponse;
 import com.linhnguyen.springbootbasic.dto.UserCreationRequest;
 import com.linhnguyen.springbootbasic.dto.UserUpdateRequest;
 import com.linhnguyen.springbootbasic.entity.User;
@@ -17,10 +18,12 @@ public class userController {
     @Autowired
     private UserService userService;
     @PostMapping()
-    public User createUser(
+    public ApiResponse<User> createUser(
             @RequestBody @Valid UserCreationRequest req
             ){
-        return userService.createUser(req);
+        ApiResponse<User> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.createUser(req));
+        return apiResponse;
     }
 
     @GetMapping()
@@ -29,17 +32,23 @@ public class userController {
     }
 
     @GetMapping("/{userId}")
-    public User getUser(@PathVariable String userId) {
-        return userService.getUser(userId);
+    public ApiResponse<User> getUser(@PathVariable String userId) {
+        ApiResponse<User> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.getUser(userId));
+        return apiResponse;
     }
 
     @PutMapping("/{userId}")
-    public User updateUser(@PathVariable String userId, @RequestBody @Valid UserUpdateRequest req){
-        return userService.updateUser(userId, req);
+    public ApiResponse<User> updateUser(@PathVariable String userId, @RequestBody @Valid UserUpdateRequest req){
+        ApiResponse<User> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.updateUser(userId, req));
+        return apiResponse;
     }
 
     @DeleteMapping("/{userId}")
-    public String delete (@PathVariable String userId) {
-        return userService.deleteUser(userId);
+    public ApiResponse<User> delete (@PathVariable String userId) {
+        ApiResponse<User> apiResponse = new ApiResponse<>();
+            apiResponse.setMessage(userService.deleteUser(userId));
+        return apiResponse;
     }
 }
