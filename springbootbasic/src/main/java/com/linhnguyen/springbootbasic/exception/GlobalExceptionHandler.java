@@ -1,6 +1,6 @@
 package com.linhnguyen.springbootbasic.exception;
 
-import com.linhnguyen.springbootbasic.dto.ApiResponse;
+import com.linhnguyen.springbootbasic.dto.request.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
