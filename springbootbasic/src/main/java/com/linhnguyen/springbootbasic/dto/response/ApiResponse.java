@@ -1,4 +1,4 @@
-package com.linhnguyen.springbootbasic.dto.request;
+package com.linhnguyen.springbootbasic.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

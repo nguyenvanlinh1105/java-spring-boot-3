@@ -1,6 +1,6 @@
 package com.linhnguyen.springbootbasic.controller;
 
-import com.linhnguyen.springbootbasic.dto.request.ApiResponse;
+import com.linhnguyen.springbootbasic.dto.response.ApiResponse;
 import com.linhnguyen.springbootbasic.dto.request.UserCreationRequest;
 import com.linhnguyen.springbootbasic.dto.request.UserUpdateRequest;
 import com.linhnguyen.springbootbasic.dto.response.UserResponse;
